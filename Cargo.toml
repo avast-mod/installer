@@ -1,0 +1,31 @@
+[package]
+name = "avast-installer"
+version = "0.1.0"
+edition = "2024"
+description = "Installs GDPatch and AVaSt into Antivirus Survivors 2003 Professional"
+authors = ["malidev"]
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "avast-installer"
+path = "src/main.rs"
+
+[dependencies]
+eframe = "0.36"
+rfd = "0.17"
+ureq = "3"
+zip = { version = "8.6", default-features = false, features = ["deflate"] }
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.56"
+
+[build-dependencies]
+winresource = "0.1"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = "s"
+strip = true
+panic = "abort"
